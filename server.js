@@ -22,6 +22,7 @@ const PREVENTE_MAX = 2000;
 const TOTAL_TICKETS = 12000;
 
 // ─── Middleware ───
+// ─── CORS configuré pour production ───
 const ALLOWED_ORIGINS = [
   'https://rossy-coliseum.onrender.com',
   'https://rossy-show-client.onrender.com',
