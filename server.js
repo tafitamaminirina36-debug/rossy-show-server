@@ -22,8 +22,27 @@ const PREVENTE_MAX = 2000;
 const TOTAL_TICKETS = 12000;
 
 // ─── Middleware ───
-app.use(cors());
-app.use(express.json());
+const ALLOWED_ORIGINS = [
+  'https://rossy-coliseum.onrender.com',
+  'https://rossy-show-client.onrender.com',
+  'https://rossy-show.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:3001'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // ─── Auth Middleware ───
 const authenticateToken = (req, res, next) => {
