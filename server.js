@@ -45,6 +45,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// AJOUTE CECI → Gestion explicite du preflight OPTIONS
+app.options('*', cors());
 // ─── Auth Middleware ───
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
